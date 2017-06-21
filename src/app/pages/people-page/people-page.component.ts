@@ -1,4 +1,6 @@
+import { PersonService } from './../../services/person.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-people-page',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PeoplePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public personService : PersonService, private router : Router) { }
 
   ngOnInit() {
+  }
+
+  generate(){
+    this.personService.generatePerson().then(person => {
+      this.router.navigate(['person/', person.id]);
+    });
   }
 
 }
