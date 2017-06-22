@@ -1,3 +1,46 @@
-<p>
-  home-page works!
-</p>
+<h1>Início</h1>
+<hr/>
+<div>
+  <h2>Relatório de pessoas</h2>
+  <hr/>
+  <div class="row" *ngIf="peopleTotal > 0">
+    <div class="col-md-4">
+      <h2>Por equipes</h2>
+      <hr/>
+      <canvas baseChart [data]="chartPeopleTeamData" [labels]="chartPeopleTeamLabels" chartType="pie"></canvas>
+    </div>
+    <div class="col-md-4">
+      <h2>Por nível</h2>
+      <hr/>
+      <canvas baseChart [data]="chartPeopleLevelData" [labels]="chartPeopleLevelLabels" chartType="pie"></canvas>
+    </div>
+    <div class="col-md-4">
+      <h2>Por sexo</h2>
+      <hr/>
+      <canvas baseChart [data]="chartPeopleGenderData" [labels]="chartPeopleGenderLabels" chartType="pie"></canvas>
+    </div>
+  </div>
+  <div class="jumbotron jumbotron-fluid" *ngIf="peopleTotal == 0">
+    <div class="container">
+      <h1 class="display-3">Sem pessoas!</h1>
+      <p class="lead">Você ainda não cadastrou nenhuma pessoa no sistema e por isso não é possível gerar relatórios.</p>
+      <hr/>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" role="button" routerLink="/people">Ir para pessoas</a>
+      </p>
+    </div>
+  </div>
+  <hr/>
+  <h2>Relatório de pessoas</h2>
+  <hr/>
+  <div class="row" *ngIf="peopleTotal > 0">
+    <div class="col-md-12">
+      <h2>Por equipes</h2>
+      <hr/>
+      <canvas baseChart
+            [datasets]="chartTeamsLevelData"
+            [labels]="chartTeamsLevelLabels"
+            chartType="bar"></canvas>
+    </div>
+  </div>
+</div>

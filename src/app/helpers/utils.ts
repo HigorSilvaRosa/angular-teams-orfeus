@@ -15,13 +15,17 @@ export class Utils {
         return color;
     }
 
-    public static objectToArray(obj){
+    public static objectToArray(obj) {
         let array = []
         let keys = Object.keys(obj)
-        for (var i in keys){
+        for (var i in keys) {
             let key = keys[i];
             array.push(obj[key]);
         }
         return array;
+    }
+
+    public static capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 }

@@ -26,6 +26,10 @@ export class PersonService {
     }
   }
 
+  getTotal() : number{
+    return Object.keys(this.data).length
+  }
+
   loadPerson(id): any {
     return this.data[id];
   }
@@ -35,9 +39,82 @@ export class PersonService {
     this.saveData();
   }
 
+  deletePerson(id){
+    delete this.data[id];
+    this.saveData();
+  }
+
   loadAllPeople() {
     return Utils.objectToArray(this.data);
   }
+
+  loadFreePeople() : Array<any>{
+    let all = this.loadAllPeople();
+    let result = []
+    for (var i in all){
+     let person = all[i];
+     if (!person.team || person.team == null || person.team == "" || person.team == "0" || person.team == 0 ){
+       result.push(person)
+     }
+    }
+    return result;
+  }
+
+  loadTeamPeople(teamId) : Array<any>{
+    let all = this.loadAllPeople();
+    let result = []
+    teamId = ""+teamId;
+    for (var i in all){
+     let person = all[i];
+     if (person.team == teamId){
+       result.push(person)
+     }
+    }
+    return result;
+  }
+
+  loadTeamGroupPeople() : any{
+    let all = this.loadAllPeople();
+    let result = {}
+    for (var i in all){
+     let person = all[i];
+     if (!person.team || person.team == ""){
+       person.team = "0"
+     }
+     if(!result[person.team]){
+       result[person.team] = []
+     }
+     result[person.team].push(person)
+    }
+    return result;
+  }
+
+  loadLevelGroupPeople() : any{
+    let all = this.loadAllPeople();
+    let result = {}
+    for (var i in all){
+     let person = all[i];
+     if(!result[person.level]){
+       result[person.level] = []
+     }
+     result[person.level].push(person)
+    }
+    return result;
+  }
+
+  loadGenderGroupPeople() : any{
+    let all = this.loadAllPeople();
+    let result = {}
+    for (var i in all){
+     let person = all[i];
+     if(!result[person.gender]){
+       result[person.gender] = []
+     }
+     result[person.gender].push(person)
+    }
+    return result;
+  }
+  
 
   generatePerson() {
     return new Promise<any>((resolve, reject) => {
@@ -45,6 +122,8 @@ export class PersonService {
       this.http.get(url).subscribe(response => {
         let responsePerson = response.json().results[0];
         let person: any = this.formatPersonFromApi(responsePerson);
+        person.first_name = Utils.capitalizeFirstLetter(person.first_name);
+        person.last_name = Utils.capitalizeFirstLetter(person.last_name);
         person.id = Utils.generateUniqueId();
         person.level = Utils.getRandomValueFromArray(this.getLevelArray());
         this.savePerson(person);

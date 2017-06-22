@@ -18,7 +18,7 @@ export class TeamService {
     return new Promise<any>((resolve, reject) => {
       let team : any = {
         id: Utils.generateUniqueId(),
-        name: "Novo time",
+        name: "Equipe sem nome",
         color: Utils.getRandomColor(),
         description: ""
       }
@@ -33,6 +33,11 @@ export class TeamService {
 
   saveTeam(team){
     this.data[team.id] = team;
+    this.saveData();
+  }
+
+  deleteTeam(id){
+    delete this.data[id];
     this.saveData();
   }
 

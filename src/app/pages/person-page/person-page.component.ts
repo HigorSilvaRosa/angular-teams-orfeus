@@ -1,7 +1,7 @@
 import { TeamService } from './../../services/team.service';
 import { PersonService } from './../../services/person.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-person-page',
@@ -15,9 +15,11 @@ export class PersonPageComponent implements OnInit {
   public levels : Array<any> [];
   public teams : Array<any> [];
 
-  constructor(private route: ActivatedRoute, public personService : PersonService, public teamService : TeamService) {
+  constructor(private route: ActivatedRoute, private router : Router, public personService : PersonService, public teamService : TeamService) {
     
   }
+
+  deleteAlertIsVisible = false;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -31,6 +33,15 @@ export class PersonPageComponent implements OnInit {
 
   editPerson(form){
     this.personService.savePerson(this.person);
+  }
+
+  deleteTeam(){
+    this.personService.deletePerson(this.person.id);
+    this.router.navigate(["people"])
+  }
+
+  showDeleteAlert(){
+    this.deleteAlertIsVisible = true;
   }
 
 }

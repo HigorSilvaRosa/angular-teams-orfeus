@@ -1,3 +1,6 @@
+<h1>{{ person.first_name }} {{ person.last_name}}</h1>
+<h1 *ngIf="person.first_name == '' && person.last_name == ''">Pessoa</h1>
+<hr/>
 <form #dataForm="ngForm" (ngSubmit) = editPerson(dataForm)>
   <div class="form-group">
     <label>Nome</label>
@@ -36,3 +39,10 @@
   <button type="submit" class="btn btn-primary" [disabled]="!firstName.valid || !lastName.valid || !phone.valid" >Salvar</button>
 </form>
 <hr/>
+
+<button type="button" class="btn btn-danger" (click)="showDeleteAlert()" *ngIf="!deleteAlertIsVisible">Excluir</button>
+<div class="alert alert-danger" role="alert" *ngIf="deleteAlertIsVisible">
+  <h4 class="alert-heading">Excluir!</h4>
+  <p>Você tem certeza que deseja excluir essa equipe?</p>
+  <button type="button" class="btn btn-danger" (click)="deleteTeam()">Tenho certeza!</button>
+</div>
