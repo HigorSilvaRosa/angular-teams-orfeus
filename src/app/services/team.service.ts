@@ -27,6 +27,10 @@ export class TeamService {
     })
   }
 
+   getTotal() : number{
+    return Object.keys(this.data).length
+  }
+
   loadTeam(id){
     return this.data[id];
   }

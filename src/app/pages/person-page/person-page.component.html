@@ -1,6 +1,9 @@
 <h1>{{ person.first_name }} {{ person.last_name}}</h1>
 <h1 *ngIf="person.first_name == '' && person.last_name == ''">Pessoa</h1>
 <hr/>
+<div class="text-center">
+  <img [src]="person.image" class="rounded">
+</div>
 <form #dataForm="ngForm" (ngSubmit) = editPerson(dataForm)>
   <div class="form-group">
     <label>Nome</label>

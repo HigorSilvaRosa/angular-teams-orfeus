@@ -12,6 +12,7 @@ export class HomePageComponent implements OnInit {
   constructor(public personService: PersonService, public teamService: TeamService) { }
 
   peopleTotal: number = 0;
+  teamsTotal: number = 0;
 
   public chartPeopleTeamLabels: Array<string> = [];
   public chartPeopleTeamData: Array<number> = [];
@@ -27,6 +28,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.peopleTotal = this.personService.getTotal();
+    this.teamsTotal = this.teamService.getTotal();
     let teamGroupPeople = this.personService.loadTeamGroupPeople();
     for (var i in Object.keys(teamGroupPeople)) {
       let key = Object.keys(teamGroupPeople)[i];
