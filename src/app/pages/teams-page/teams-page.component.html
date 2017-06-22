@@ -1,3 +1,13 @@
-<p>
-  teams-page works!
-</p>
+<h1>Equipes</h1>
+<hr/>
+<button type="button" class="btn btn-primary" (click)="generate()">Criar nova equipe</button>
+<hr/>
+<div class="card-columns">
+    <div class="card" *ngFor="let team of teams" (click)="openTeam(team)">
+        <div class="color-block" [ngStyle]="{'background-color': team.color}"></div>
+        <div class="card-block">
+            <h4 class="card-title">{{ team.name }}</h4>
+            <p class="card-text">{{ team.description }}</p>
+        </div>
+    </div>
+</div>

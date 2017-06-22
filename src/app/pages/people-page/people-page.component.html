@@ -1,1 +1,5 @@
+<h1>Pessoas</h1>
+<hr/>
 <button type="button" class="btn btn-primary" (click)="generate()">Criar nova pessoa</button>
+<hr/>
+<ng2-smart-table [settings]="tableSettings" [source]="people" (userRowSelect)="selectRow($event)"></ng2-smart-table>

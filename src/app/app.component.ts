@@ -1,3 +1,4 @@
+import { TeamService } from './services/team.service';
 import { PersonService } from './services/person.service';
 import { Component } from '@angular/core';
 
@@ -5,12 +6,12 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [PersonService, ]
+  providers: [PersonService, TeamService]
 })
 export class AppComponent {
   title = 'app';
 
-  constructor(public personService : PersonService) {
+  constructor() {
 
   }
 }

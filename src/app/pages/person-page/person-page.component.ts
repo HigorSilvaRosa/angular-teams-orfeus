@@ -18,7 +18,7 @@ export class PersonPageComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
        let id = parseInt(params['id']);
-       this.person = this.personService.getPerson(id);
+       this.person = this.personService.loadPerson(id);
        console.log(this.person);
     });
   }
