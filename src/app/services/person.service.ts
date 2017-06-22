@@ -11,6 +11,11 @@ export class PersonService {
     senior: "senior",
   }
 
+  private genders: any = {
+    male: "Masculino",
+    female: "Feminino"
+  }
+
   private storageDataKey = "angular-teams-orfeus__people"
   private data: any = {}
 
@@ -34,7 +39,6 @@ export class PersonService {
     return Utils.objectToArray(this.data);
   }
 
-
   generatePerson() {
     return new Promise<any>((resolve, reject) => {
       let url = "https://randomuser.me/api/?results=" + 1;
@@ -56,6 +60,23 @@ export class PersonService {
       list.push(key);
     }
     return list;
+  }
+
+  getGenderArray(): Array<any> {
+    let list: Array<any> = []
+    for (var i in Object.keys(this.genders)) {
+      let key = Object.keys(this.genders)[i]
+      list.push(key);
+    }
+    return list;
+  }
+
+  getGenderDisplay(gender){
+    return this.genders[gender]
+  }
+
+  getLevelDisplay(level){
+    return this.levels[level]
   }
 
   private formatPersonFromApi(apiPerson): any {
